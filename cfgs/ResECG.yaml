@@ -1,0 +1,31 @@
+#############################################################
+#1. Model Define Configs
+#############################################################
+ModelConfig:
+  model_name: 'ResECG'
+  num_filters_1st_conv: 32
+  kernel_size_conv: 15
+  Strides_ResBlock: [1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2]
+  conv_increase_channels_at: 4
+  conv_num_skip: 2
+  dropout_rate: 0.2 
+  num_classes: 4
+
+#############################################################
+#2. Optimizer & Train Configs
+#############################################################
+OptimizerConfig:
+  epoches: 50
+  learning_rate: 0.005
+
+#############################################################
+#    3. DataSet Config
+#############################################################  
+DatasetConfig:
+  filelist_root: './experiments/cinc17/'
+  trainlist: 'train.json'
+  validlist: 'valid.json'
+  batch_size: 32
+  num_workers: 8
+  shuffle: True
+

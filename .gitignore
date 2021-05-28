@@ -1,0 +1,11 @@
+*.pyc
+__pycache__
+# outputs: logs, trained models
+outputs/
+# dataset
+experiments
+data
+
+*.out
+.vscode
+EDA
