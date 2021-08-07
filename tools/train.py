@@ -6,6 +6,7 @@ from munch import Munch
 import torch
 import torch.nn as nn
 from torch.utils.data import DataLoader
+from kornia.losses import FocalLoss
 # custom module
 import __init_path
 from dataset.ECGDataset_cinc17 import CINC17
@@ -28,7 +29,19 @@ def train(params):
     model.to(device)
     # define criterion, optimizer, scheduler
     OptimizerConfig = Munch(params['OptimizerConfig'])
-    criterion = nn.CrossEntropyLoss().to(device)
+    if(OptimizerConfig.loss == 'CrossEntropyLoss'):
+        if(OptimizerConfig.use_unbalance_weight):
+            class_weight = torch.tensor(OptimizerConfig.class_weight)
+            class_weight = class_weight*0.2+0.25
+        else:
+            class_weight = torch.tensor([1.0, 1.0, 1.0, 1.0])
+        print('CrossEntropy loss weight:\n', class_weight)
+        criterion = nn.CrossEntropyLoss(weight=class_weight).to(device)
+        print(" > Using CrossEntropy Loss...")
+    elif(OptimizerConfig.loss == 'FocalLoss'):
+        kwargs = {"alpha": 0.5, "gamma": 2.0, "reduction": 'mean'}
+        criterion = FocalLoss(**kwargs).to(device)
+        print(" > Using Focal Loss...")
     optimizer = torch.optim.Adam(model.parameters(), lr=OptimizerConfig.learning_rate, amsgrad =True)
     #scheduler = torch.optim.lr_scheduler.MultiStepLR(optimizer, milestones=[20,30,40], gamma=0.25)
     num_epoches = OptimizerConfig.epoches

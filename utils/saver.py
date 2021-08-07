@@ -16,7 +16,7 @@ def plot_confusion_matrix(comfusion_matrix, classes, save_name):
     for x_val, y_val in zip(x.flatten(), y.flatten()):
         c = comfusion_matrix[y_val][x_val]
         if c > 0.001:
-            plt.text(x_val, y_val, "%0.2f" % (c,), color='white', fontsize=15, va='center', ha='center')
+            plt.text(x_val, y_val, "%0.3f" % (c,), color='white', fontsize=15, va='center', ha='center')
     
     plt.imshow(comfusion_matrix, interpolation='nearest', cmap=plt.cm.binary)
     plt.title('ResECG', fontdict = {'fontsize' : 12})

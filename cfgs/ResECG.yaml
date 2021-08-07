@@ -13,10 +13,15 @@ ModelConfig:
 
 #############################################################
 #2. Optimizer & Train Configs
+# loss: CrossEntropyLoss or FocalLoss 
+# base unbalance weight: [0.03572452,0.07508805,0.23923172,0.64995571]
 #############################################################
 OptimizerConfig:
-  epoches: 50
-  learning_rate: 0.005
+  epoches: 100
+  learning_rate: 0.001
+  loss: 'CrossEntropyLoss'
+  use_unbalance_weight: True
+  class_weight: [0.03572452,0.07508805,0.23923172,0.64995571]
 
 #############################################################
 #    3. DataSet Config
@@ -24,8 +29,8 @@ OptimizerConfig:
 DatasetConfig:
   filelist_root: './experiments/cinc17/'
   trainlist: 'train.json'
-  validlist: 'valid.json'
-  batch_size: 32
+  validlist: 'valid_9000ms_A.json'
+  batch_size: 64
   num_workers: 8
   shuffle: True
 

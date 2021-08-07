@@ -1,6 +1,6 @@
 import torch
 import numpy as np
-from sklearn.metrics import confusion_matrix
+from sklearn.metrics import confusion_matrix, classification_report
 from .stat import AverageMeter, accuracy
 from .saver import plot_confusion_matrix
 
@@ -76,6 +76,7 @@ def validate(valid_loader, model, device, criterion, print_freq, eval_only):
         if eval_only:
             logits_matrix = np.concatenate(logits_matrix)
             targets_list = np.concatenate(targets_list)
+            print(classification_report(targets_list, logits_matrix, target_names = ['A', 'N', 'O', '~'], digits=3))
             cm = confusion_matrix(logits_matrix, targets_list)
             cm_normalized = cm.astype('float') / cm.sum(axis=1)[:, np.newaxis]
             plot_confusion_matrix(cm_normalized, ['A', 'N', 'O', '~'], './figs/cm.png')

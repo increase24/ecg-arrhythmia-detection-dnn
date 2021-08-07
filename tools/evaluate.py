@@ -12,7 +12,7 @@ from dataset.ECGDataset_cinc17 import CINC17
 from network.ResECG import ResECG
 from utils.trainer import validate
 
-def evaluate(param):
+def evaluate(params):
     print("Start loading the data....")
     DatasetConfig = Munch(params['DatasetConfig'])
     validset = CINC17(os.path.join(DatasetConfig.filelist_root, DatasetConfig.validlist), 256)
@@ -22,7 +22,7 @@ def evaluate(param):
     ModelConfig = Munch(params['ModelConfig'])
     model = ResECG(ModelConfig)
     model.to(device)
-    ckpt_path = './outputs/weights/ResECG_05-28-12-25.pth.tar'
+    ckpt_path = './outputs/weights/ResECG_05-29-14-29.pth.tar'
     print("=> loading checkpoint '{}'".format(ckpt_path))
     checkpoint = torch.load(ckpt_path)
     model.load_state_dict(checkpoint['state_dict'])
