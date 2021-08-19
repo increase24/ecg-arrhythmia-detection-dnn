@@ -1,8 +1,3 @@
-<style>
-table {
-margin: auto;
-}
-</style>
 # ecg-arrhythmia-detection-dnn
 ![Python 3.7](https://img.shields.io/badge/python-3.7-green.svg?style=plastic)
 ![PyTorch 1.5](https://img.shields.io/badge/PyTorch%20-%23EE4C2C.svg?style=plastic)
@@ -21,7 +16,7 @@ The **ResECG** net is a variant of the popular image classification network **Re
 The code is developed using python 3.7 on Ubuntu 20.04. NVIDIA GPU is needed.
 
 ## Data preparing
-The experiment was taken on the [Physionet 2017 challenge](https://www.physionet.org/challenge/2017/) dataset.
+The experiment was taken on the [Physionet 2017 challenge dataset](https://www.physionet.org/challenge/2017/).
 1. To download the datasets, run:
 ```
 sh ./experiments/cinc17/setup.sh

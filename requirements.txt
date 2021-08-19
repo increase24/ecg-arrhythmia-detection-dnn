@@ -1,0 +1,10 @@
+munch==2.5.0
+torch==1.5.0
+numpy==1.20.1
+tqdm==4.61.0
+matplotlib==3.4.2
+kornia==0.3.0
+scipy==1.6.3
+pandas==1.2.4
+PyYAML==5.4.1
+scikit_learn==0.24.2
