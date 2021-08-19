@@ -1,3 +1,8 @@
+<style>
+table {
+margin: auto;
+}
+</style>
 # ecg-arrhythmia-detection-dnn
 ![Python 3.7](https://img.shields.io/badge/python-3.7-green.svg?style=plastic)
 ![PyTorch 1.5](https://img.shields.io/badge/PyTorch%20-%23EE4C2C.svg?style=plastic)
@@ -22,6 +27,7 @@ The experiment was taken on the [Physionet 2017 challenge](https://www.physionet
 sh ./experiments/cinc17/setup.sh
 ```
 or manually download from  [Physionet 2017 challenge dataset](https://www.physionet.org/content/challenge-2017/1.0.0/)
+
 2. Then run the following code to obtain the json file for experiment config:
 ```
 python ./experiments/cinc17/build_dataset.py
@@ -53,9 +59,12 @@ python ./experiments/cinc17/build_dataset.py
 | ResECG                             | 0.889 | 0.835 | 0.768 | 0.661 | 0.839 |
 | ResECG（+ label unblanced weight） | 0.899 | 0.835 | 0.763 | 0.742 | 0.846 |
 | ResECG（+ FocalLoss）              | 0.894 | 0.825 | 0.762 | 0.719 | 0.841 |
+
 <p align="center">
 <b>Table 1.</b> The F1 scores across different method.
 </p>
+
+The experimental results are demonstrated as Table.1. ResECG with label unbalanced weight attains the highest F1 score.
 
 <!-- ### confusion matrix
 
