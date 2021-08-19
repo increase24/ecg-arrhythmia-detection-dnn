@@ -3,8 +3,7 @@ __pycache__
 # outputs: logs, trained models
 outputs/
 # dataset
-experiments
-data
+experiments/cinc17
 
 *.out
 .vscode

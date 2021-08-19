@@ -12,7 +12,7 @@ from dataset.ECGDataset_cinc17 import CINC17
 from network.ResECG import ResECG
 from utils.trainer import validate
 
-def evaluate(params):
+def evaluate(params, ckpt):
     print("Start loading the data....")
     DatasetConfig = Munch(params['DatasetConfig'])
     validset = CINC17(os.path.join(DatasetConfig.filelist_root, DatasetConfig.validlist), 256)
@@ -22,9 +22,8 @@ def evaluate(params):
     ModelConfig = Munch(params['ModelConfig'])
     model = ResECG(ModelConfig)
     model.to(device)
-    ckpt_path = './outputs/weights/ResECG_05-29-14-29.pth.tar'
-    print("=> loading checkpoint '{}'".format(ckpt_path))
-    checkpoint = torch.load(ckpt_path)
+    print("=> loading checkpoint '{}'".format(ckpt))
+    checkpoint = torch.load(ckpt)
     model.load_state_dict(checkpoint['state_dict'])
     # define criterion, optimizer, scheduler
     criterion = nn.CrossEntropyLoss().to(device)
@@ -33,10 +32,12 @@ def evaluate(params):
 def parse_args():
     parser = argparse.ArgumentParser()
     parser.add_argument("--config_file", help="path to config file")
+    parser.add_argument("--ckpt", help="path to checkpoint weight file")
     args = parser.parse_args()
     return args
 
 if __name__ == '__main__':
     args = parse_args()
     params = yaml.load(open(args.config_file, 'r'))
-    evaluate(params)
+    ckpt = args.ckpt
+    evaluate(params, ckpt)

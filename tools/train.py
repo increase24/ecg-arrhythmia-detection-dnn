@@ -18,8 +18,8 @@ def train(params):
     curr_time = time.strftime("%m-%d-%H-%M", time.localtime())
     print("Start loading the data....")
     DatasetConfig = Munch(params['DatasetConfig'])
-    trainset = CINC17(os.path.join(DatasetConfig.filelist_root, DatasetConfig.trainlist), 256)
-    validset = CINC17(os.path.join(DatasetConfig.filelist_root, DatasetConfig.validlist), 256)
+    trainset = CINC17(os.path.join(DatasetConfig.filelist_root, DatasetConfig.trainlist), DatasetConfig.step)
+    validset = CINC17(os.path.join(DatasetConfig.filelist_root, DatasetConfig.validlist), DatasetConfig.step)
     trainloader = DataLoader(trainset, batch_size = DatasetConfig.batch_size, shuffle=DatasetConfig.shuffle, num_workers=DatasetConfig.num_workers)
     validloader = DataLoader(validset, batch_size = DatasetConfig.batch_size, shuffle=DatasetConfig.shuffle, num_workers=DatasetConfig.num_workers)
     print('Finish loading the data....')
@@ -73,11 +73,11 @@ def train(params):
 
 def parse_args():
     parser = argparse.ArgumentParser()
-    parser.add_argument("--config_file", help="path to config file")
+    parser.add_argument("--config", help="path to config file")
     args = parser.parse_args()
     return args
 
 if __name__ == '__main__':
     args = parse_args()
-    params = yaml.load(open(args.config_file, 'r'))
+    params = yaml.load(open(args.config, 'r'))
     train(params)

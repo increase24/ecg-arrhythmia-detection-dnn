@@ -29,8 +29,9 @@ OptimizerConfig:
 DatasetConfig:
   filelist_root: './experiments/cinc17/'
   trainlist: 'train.json'
-  validlist: 'valid_9000ms_A.json'
+  validlist: 'valid.json'
   batch_size: 64
   num_workers: 8
   shuffle: True
+  step: 256
 
